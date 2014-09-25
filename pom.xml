@@ -1,14 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.wali</groupId>
-	<artifactId>Wali</artifactId>
+	<groupId>com.smken</groupId>
+	<artifactId>gis</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<modules>
-		<module>smblog</module>
-		<module>smdiary</module>
-	</modules>
+	<packaging>pom</packaging> 
 
 	<dependencyManagement>
 		<dependencies>
@@ -242,4 +238,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	<modules>
+		<module>gisweb</module>
+	</modules>
 </project>
