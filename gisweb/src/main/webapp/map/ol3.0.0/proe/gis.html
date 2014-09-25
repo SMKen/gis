@@ -24,76 +24,32 @@
 			}) ],
 			view : new ol.View({
 				center : ol.proj.transform([114.0, 30.0], 'EPSG:4326','EPSG:3857'),
-				zoom : 4
+				zoom :2
 			})
-		});
+		}); 
 		
-		var vectorSource = new ol.source.GeoJSON(
-			    /** @type {olx.source.GeoJSONOptions} */ ({
-			      object: {
-			        'type': 'FeatureCollection',
-			        'crs': {
-			          'type': 'name',
-			          'properties': {
-			            'name': 'EPSG:3857'
-			          }
-			        },
-			        'features': [
-			          {
-			            'type': 'Feature',
-			            'geometry': {
-			              'type': 'Point',
-			              'coordinates': [0, 0]
-			            }
-			          },
-			          {
-			            'type': 'Feature',
-			            'geometry': {
-			              'type': 'Polygon',
-			              'coordinates': [[[-5e6, -1e6], [-4e6, 1e6], [-3e6, -1e6]]]
-			            }
-			          },
-			          {
-			            'type': 'Feature',
-			            'geometry': {
-			              'type': 'Polygon',
-			              'coordinates':[[[1e6, -6e6], [2e6, -4e6], [3e6, -6e6]]]
-			            }
-			          },
-			          {
-			            'type': 'Feature',
-			            'geometry': {
-			              'type': 'MultiPolygon',
-			              'coordinates': [
-			                              [[[-5e6, 6e6], [-5e6, 8e6], [-3e6, 8e6], [-3e6, 6e6]]],
-			                              [[[-2e6, 6e6], [-2e6, 8e6], [0, 8e6], [0, 6e6]]],
-			                              [[[1e6, 6e6], [1e6, 8e6], [3e6, 8e6], [3e6, 6e6]]]
-			                            ]
-			            }
-			          }
-			        ]
-			      }
-			    }));
+		var vectorSource2 = new ol.source.GeoJSON();
+		vectorSource2.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
+		vectorSource2.addFeature(new ol.Feature(new ol.geom.Polygon([[[-5e6, -1e6], [-4e6, 1e6], [-3e6, -1e6]]])));
+		vectorSource2.addFeature(new ol.Feature(new ol.geom.MultiPolygon(
+					 [
+	                  [[[-5e6, 6e6], [-5e6, 8e6], [-3e6, 8e6], [-3e6, 6e6]]],
+	                  [[[-2e6, 6e6], [-2e6, 8e6], [0, 8e6], [0, 6e6]]],
+	                  [[[1e6, 6e6], [1e6, 8e6], [3e6, 8e6], [3e6, 6e6]]]
+	                ]
+				)));
 
-			vectorSource.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
+		var vectorLayer = new ol.layer.Vector({
+		  source: vectorSource2
+		});
 
-			var vectorLayer = new ol.layer.Vector({
-			  source: vectorSource
-			});
-
-			map.addLayer(vectorLayer); 
-			
-			function remove(){
-				map.removeLayer(vectorLayer); 
-			}
-			
-			//window.setTimeout(remove,5000)
-		 /* 
-           var geojson_format = new ol.Format.GeoJSON();
-           var vector_layer = new OpenLayers.Layer.Vector(); 
-           map.addLayer(vector_layer);
-           vector_layer.addFeatures(geojson_format.read(featurecollection));
-		 */
+		map.addLayer(vectorLayer); 
+		
+		function remove(){
+			map.removeLayer(vectorLayer); 
+		}
+		
+		//window.setTimeout(remove,5000) 
 		
 	</script>
 </body>
