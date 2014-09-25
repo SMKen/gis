@@ -26,13 +26,22 @@
 			})
 		}); 
 		
-		var vectorSource2 = new ol.source.GeoJSON();
-		vectorSource2.addFeature(new ol.Feature(new ol.geom.Circle([5e6, 7e6], 1e6)));
-		vectorSource2.addFeature(new ol.Feature(new ol.geom.Polygon(
-				/* [[[-5e6, -1e6], [-4e6, 1e6], [-3e6, -1e6]]] */
+		var vectorSource2 = new ol.source.GeoJSON(); 
+		//method 1
+		/* [[[-5e6, -1e6], [-4e6, 1e6], [-3e6, -1e6]]] */
+		/* vectorSource2.addFeature(new ol.Feature(new ol.geom.Polygon(
 				[[[73.557702,15.780000000000086], [134.77392499999996,15.780000000000086], [134.77392499999996,53.560861000000045], [73.557702,53.560861000000045], [73.557702,15.780000000000086]]]
 				).transform('EPSG:4326','EPSG:3857') )); 
-
+ 		*/
+		
+ 		//method 2
+ 		//polygon = "POLYGON((73.557702 15.780000000000086,134.77392499999996 15.780000000000086,134.77392499999996 53.560861000000045,73.557702 53.560861000000045,73.557702 15.780000000000086))";
+ 		polygon = "POLYGON((104.30797600000005 25.33155700000009,105.69545699999998 25.33155700000009,105.69545699999998 26.921188000000143,104.30797600000005 26.921188000000143,104.30797600000005 25.33155700000009))";
+ 		ff = new ol.format.WKT().readFeature(polygon,
+				{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'});
+		console.log(ff);
+		vectorSource2.addFeature(ff);
+		
 		var vectorLayer = new ol.layer.Vector({
 		  source: vectorSource2
 		});
