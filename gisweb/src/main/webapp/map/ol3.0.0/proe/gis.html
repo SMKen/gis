@@ -82,6 +82,12 @@
 			});
 
 			map.addLayer(vectorLayer); 
+			
+			function remove(){
+				map.removeLayer(vectorLayer); 
+			}
+			
+			//window.setTimeout(remove,5000)
 		 /* 
            var geojson_format = new ol.Format.GeoJSON();
            var vector_layer = new OpenLayers.Layer.Vector(); 
