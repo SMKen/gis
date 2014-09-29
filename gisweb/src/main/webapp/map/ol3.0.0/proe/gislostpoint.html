@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1">
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+<link rel="stylesheet" href="../req/ol.css" type="text/css">
+<script src="../req/ol.js" type="text/javascript"></script>
+<style type="text/css"> 
+.map {height: 800px;width: 100%;} 
+</style>
+<title>Gis area</title>
+</head>
+<body>
+	<div id="map" class="map"></div>
+	<script type="text/javascript">
+		var map = new ol.Map({
+			target : 'map',
+			layers : [ new ol.layer.Tile({
+				source: new ol.source.OSM()
+				/* source : new ol.source.MapQuest({layer : 'sat'}) */
+			}) ],
+			view : new ol.View({
+				center : ol.proj.transform([114.0, 30.0], 'EPSG:4326','EPSG:3857'),
+				zoom :2
+			})
+		}); 
+		
+		var vectorSource2 = new ol.source.GeoJSON(); 
+		//method 1
+		/* [[[-5e6, -1e6], [-4e6, 1e6], [-3e6, -1e6]]] */
+		/* vectorSource2.addFeature(new ol.Feature(new ol.geom.Polygon(
+				[[[73.557702,15.780000000000086], [134.77392499999996,15.780000000000086], [134.77392499999996,53.560861000000045], [73.557702,53.560861000000045], [73.557702,15.780000000000086]]]
+				).transform('EPSG:4326','EPSG:3857') )); 
+ 		*/
+		
+ 		//method 2
+ 		//polygon = "POLYGON((73.557702 15.780000000000086,134.77392499999996 15.780000000000086,134.77392499999996 53.560861000000045,73.557702 53.560861000000045,73.557702 15.780000000000086))";
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-172.17831 -13.8031)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-162.31029 55.06167)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-158.40222 56.29528)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-159.78516 -21.24842)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-157.36526 1.98329)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-153.4 57.76667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-149.28333 -17.75)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-135.33333 57.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-134.25111 56.65389)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-134.9436 57.51528)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-133.00056 56.50056)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-131.22 52.29959)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-129.88684 54.98282)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-127.55315 50.4663)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-127.7033 52.34965)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-127.41985 50.69962)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-127.10314 51.04964)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-126.0863 50.49963)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-125.43622 50.28294)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-124.6696 50.43295)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-109.51667 26.7)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-104.7 19.21667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-90.87341 -0.67015)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-90.96654 -0.95542)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-90.4 20.86667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-84.28333 15.8)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.02626 60.01853)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.545 10.06444)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.23413 9.06085)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.16667 10.66667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.31343 10.3258)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.166664 10.0)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.26455 8.2353)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-72.225 7.76694)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.76667 10.8)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.91352 9.00003)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.69806 8.715833)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.91667 7.66667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.84446 7.50005)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.28255 41.73038)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.25637 11.8235)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.03678 10.68156)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.30818 10.19635)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.085556 8.719722)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.13705 8.22343)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.17788 7.81348)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.3014 7.44329)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-71.0 10.83333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.92656 9.84639)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.80759 9.63217)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.81561 9.18583)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.6948 8.86052)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.76664 8.27664)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.41985 7.645)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.73236 7.24241)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.25499 11.19913)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.12058 11.02037)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.25 10.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.22855 9.62872)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.25 9.25)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.18072 8.73109)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-70.11027 8.27585)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.68397 11.12034)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.56895 10.76809)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.83333 10.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.7937 9.78734)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.74741 9.04602)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.65722 8.70833)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.83333 8.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.77752 8.10155)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.49765 7.06088)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.13722 11.37389)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.27776 10.81953)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.16227 10.28586)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.1633 9.78128)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.24333 9.181111)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.20832 8.69625)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.30798 8.09536)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-69.41667 7.58333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.72604 11.1602)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.67245 10.59732)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.78386 10.31978)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.61019 9.67687)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.83333 9.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.91745 7.92408)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.83333 7.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.2 10.25)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.33333 9.66667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.33333 9.33333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.29554 8.96216)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.36996 8.47974)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-68.43384 7.96378)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.55992 2.71861)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.7858 10.263)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.75 9.95)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.76653 8.21573)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.60674 7.6456)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.70032 4.04956)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.06667 1.91667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.29047 9.62168)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.05818 9.3863)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.39732 8.00077)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.42833 7.87722)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-67.34619 5.69252)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.74648 10.17793)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.8 9.71667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.71667 9.23333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.583336 8.666667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.04862 5.31718)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.0 3.5)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.33333 10.25)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-66.0 8.0)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.78215 43.70016)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.81306 9.86025)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.77153 9.27496)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.74247 8.99352)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.55 3.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.1935 9.59714)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.32452 9.35029)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-65.3225 8.81556)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.78204 50.26682)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.5496 9.7392)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.65478 9.3056)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.71053 8.84358)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.59222 6.327778)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.03196 50.30014)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.35841 9.30571)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.24544 8.88752)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.669445 8.073889)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.91918 10.25013)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.62722 9.701111)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.73077 9.42489)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-64.1285 8.93881)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.59862 50.23344)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.09633 10.11026)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.0 9.333333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.24778 8.719167)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.373055 8.405833)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.54333 8.064444)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-63.5 6.333333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.766666 6.25)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.5 6.16667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.08183 50.21684)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.82693 10.56916)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.73333 8.98333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.8 8.11667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.25 7.9)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.85 6.316667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.25151 9.97152)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.35164 8.9996)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-62.40917 8.105556)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.87667 7.375)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.625 6.735)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.45 5.666667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.15 4.966667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-60.20319 55.46737)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.75 9.25)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.5 8.5)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.88333 8.03333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.95 7.701667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.789444 7.353889)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.540558 6.488333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.45 5.783333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.13333 4.61667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.18182 45.23345)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-60.99755 8.58094)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.61222 7.381111)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.52778 7.25611)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.615555 6.768333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-61.36667 5.616667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-60.733334 5.1)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-60.833332 5.05)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-59.16842 55.08672)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-58.43439 54.17012)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-59.16667 -51.75)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-58.61667 6.4)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-57.01741 53.71947)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-58.4318 48.50001)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-57.61516 47.61668)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-58.41667 -33.88333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-58.4 -51.9)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-57.13142 51.4168)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-56.73139 51.30009)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-55.39818 49.33323)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-53.98142 48.1832)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-45.26512 -23.84308)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-37.16667 -11.15)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(-15.46667 11.58333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(0.78731 51.72328)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(27.76667 42.26667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(40.5 -12.95)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(43.35 -21.73333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(44.01667 -18.06667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(47.86447 42.56955)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(50.2499 44.54512)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(48.28987 42.0678)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(49.58333 -16.91667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(49.41667 -17.36667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(50.33333 -15.0)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(99.75 12.21667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(99.87203 12.27081)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(100.73524 13.83616)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(101.21295 14.20463)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(101.71769 13.95114)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(102.27364 18.06389)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(102.46058 14.42642)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(102.62254 13.83824)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(103.30508 14.44575)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(103.59439 14.47486)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(104.67017 14.79583)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(104.92481 14.58386)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(105.29318 15.89749)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(113.54222 -25.93333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(113.63333 -24.86667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(117.2 -20.63333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.38481 23.70701)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.31056 23.30694)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.21361 22.95417)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.72972 24.26417)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.7525 23.74639)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.46138 23.12493)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.48502 22.69255)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(120.73278 22.04194)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(121.16111 24.67416)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(121.42611 24.48694)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(121.39333 23.78166)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(121.80721 -18.20866)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(121.753 24.757)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(127.4 0.8)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(127.5 -0.25)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(128.31667 2.03333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(128.91667 -3.33333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(131.25 -0.88333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(131.32916 -8.0)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(132.26666 -2.93333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(133.66667 -32.11667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(137.78055 -32.61616)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(142.03333 49.08333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(142.1 48.4)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(142.8 48.63333)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(142.78362 42.15556)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+ 		vectorSource2.addFeature(new ol.format.WKT().readFeature("POINT(143.11667 49.21667)",{"dataProjection":'EPSG:4326',"featureProjection":'EPSG:3857'}));
+
+		
+		var vectorLayer = new ol.layer.Vector({
+		  source: vectorSource2
+		});
+
+		map.addLayer(vectorLayer); 
+		
+		function remove(){
+			map.removeLayer(vectorLayer); 
+		}
+		
+		//window.setTimeout(remove,5000) 
+	</script>
+</body>
+</html>
